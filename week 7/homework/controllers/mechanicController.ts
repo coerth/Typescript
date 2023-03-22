@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
-import Person from "../models/personModel";
+import Mechanic from "../models/mechanicModel";
 
-export const getPeople = async (req: Request, res: Response) => {
+export const getMechanics = async (req: Request, res: Response) => {
 
     let queryObj = req.query;
-    const data = await Person.find(queryObj)
+    console.log(queryObj)
+    const data = await Mechanic.find(queryObj)
     res.status(200)
     .header({
         "Content-type": "application/json",
@@ -13,19 +14,19 @@ export const getPeople = async (req: Request, res: Response) => {
     .json({
         status: "success",
         length: data.length,
-        people: data
+        mechanics: data
     })
 };
 
-export const getPerson = async (req: Request, res: Response) => {
+export const getMechanic = async (req: Request, res: Response) => {
 
     
-    const data = await Person.findById(req.params.id)
+    const data = await Mechanic.findById(req.params.id)
     try{
         res.status(200)
             .json({
                 status: "success",
-                person: data
+                mechanic: data
             })
     }
     catch(err)
@@ -38,11 +39,11 @@ export const getPerson = async (req: Request, res: Response) => {
     }
 };
 
-export const updatePerson = async (req: Request, res: Response) => {
+export const updateMechanic = async (req: Request, res: Response) => {
 
     
     try{
-        const person = Person.findByIdAndUpdate(req.params.id, req.body, {
+        const mechanic = Mechanic.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true
         })
@@ -51,7 +52,7 @@ export const updatePerson = async (req: Request, res: Response) => {
         res.status(200)
             .json({
                 status: "success",
-                person: person
+                mechanic: mechanic,
             })
     }
     catch(err)
@@ -64,17 +65,17 @@ export const updatePerson = async (req: Request, res: Response) => {
     }
 }
 
-export const deletePerson = async (req: Request, res: Response) => {
+export const deleteMechanic = async (req: Request, res: Response) => {
 
     
     try{
-        await Person.findByIdAndDelete(req.params.id)
+        await Mechanic.findByIdAndDelete(req.params.id)
 
 
         res.status(204)
             .json({
                 status: "success",
-                message: "Person Deleted"
+                message: "Mechanic Deleted"
             })
     }
     catch(err)
@@ -87,17 +88,17 @@ export const deletePerson = async (req: Request, res: Response) => {
     }
 }
 
-export const createPerson = async (req: Request, res: Response) => {
+export const createMechanic = async (req: Request, res: Response) => {
     try{
 
         const jsonData = req.body;
         
-        const newPerson = await Person.create(jsonData)
+        const newMechanic = await Mechanic.create(jsonData)
     
         res.status(201)
             .json({
                 status: "success",
-                Person: newPerson
+                Mechanic: newMechanic
             })
     }
     catch(err)
