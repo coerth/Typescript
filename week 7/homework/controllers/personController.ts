@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import Person from "../models/personModel";
+import catchAsync from "../utility/CatchAsync"
 
-export const getPeople = async (req: Request, res: Response) => {
+
+export const getPeople = catchAsync( async (req: Request, res: Response) => {
 
     let queryObj = req.query;
     const data = await Person.find(queryObj)
@@ -15,33 +17,24 @@ export const getPeople = async (req: Request, res: Response) => {
         length: data.length,
         people: data
     })
-};
+});
 
-export const getPerson = async (req: Request, res: Response) => {
+export const getPerson = catchAsync( async (req: Request, res: Response) => {
 
     
     const data = await Person.findById(req.params.id)
-    try{
+    
         res.status(200)
             .json({
                 status: "success",
                 person: data
             })
-    }
-    catch(err)
-    {
-        res.status(400)
-        .json({
-            status: "failed",
-            error: err
-        })
-    }
-};
-
-export const updatePerson = async (req: Request, res: Response) => {
-
     
-    try{
+    
+});
+
+export const updatePerson = catchAsync( async (req: Request, res: Response) => {
+
         const person = Person.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true
@@ -53,21 +46,11 @@ export const updatePerson = async (req: Request, res: Response) => {
                 status: "success",
                 person: person
             })
-    }
-    catch(err)
-    {
-        res.status(400)
-        .json({
-            status: "failed",
-            error: err
-        })
-    }
-}
-
-export const deletePerson = async (req: Request, res: Response) => {
-
     
-    try{
+})
+
+export const deletePerson = catchAsync( async (req: Request, res: Response) => {
+
         await Person.findByIdAndDelete(req.params.id)
 
 
@@ -76,19 +59,10 @@ export const deletePerson = async (req: Request, res: Response) => {
                 status: "success",
                 message: "Person Deleted"
             })
-    }
-    catch(err)
-    {
-        res.status(400)
-        .json({
-            status: "failed",
-            error: err
-        })
-    }
-}
+    
+})
 
-export const createPerson = async (req: Request, res: Response) => {
-    try{
+export const createPerson = catchAsync( async (req: Request, res: Response) => {
 
         const jsonData = req.body;
         
@@ -99,13 +73,4 @@ export const createPerson = async (req: Request, res: Response) => {
                 status: "success",
                 Person: newPerson
             })
-    }
-    catch(err)
-    {
-        res.status(400)
-            .json({
-                status: "failed",
-                error: err
-            })
-    }
-}
+})

@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import Mechanic from "../models/mechanicModel";
+import catchAsync from "../utility/CatchAsync"
 
-export const getMechanics = async (req: Request, res: Response) => {
+export const getMechanics = catchAsync( async (req: Request, res: Response) => {
 
     let queryObj = req.query;
     console.log(queryObj)
@@ -16,33 +17,23 @@ export const getMechanics = async (req: Request, res: Response) => {
         length: data.length,
         mechanics: data
     })
-};
+});
 
-export const getMechanic = async (req: Request, res: Response) => {
+export const getMechanic = catchAsync( async (req: Request, res: Response) => {
 
     
     const data = await Mechanic.findById(req.params.id)
-    try{
-        res.status(200)
+
+    res.status(200)
             .json({
                 status: "success",
                 mechanic: data
             })
-    }
-    catch(err)
-    {
-        res.status(400)
-        .json({
-            status: "failed",
-            error: err
-        })
-    }
-};
+});
 
-export const updateMechanic = async (req: Request, res: Response) => {
+export const updateMechanic = catchAsync( async (req: Request, res: Response) => {
 
-    
-    try{
+
         const mechanic = Mechanic.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true
@@ -54,21 +45,13 @@ export const updateMechanic = async (req: Request, res: Response) => {
                 status: "success",
                 mechanic: mechanic,
             })
-    }
-    catch(err)
-    {
-        res.status(400)
-        .json({
-            status: "failed",
-            error: err
-        })
-    }
-}
+    
+})
 
-export const deleteMechanic = async (req: Request, res: Response) => {
+export const deleteMechanic = catchAsync( async (req: Request, res: Response) => {
 
     
-    try{
+
         await Mechanic.findByIdAndDelete(req.params.id)
 
 
@@ -77,19 +60,10 @@ export const deleteMechanic = async (req: Request, res: Response) => {
                 status: "success",
                 message: "Mechanic Deleted"
             })
-    }
-    catch(err)
-    {
-        res.status(400)
-        .json({
-            status: "failed",
-            error: err
-        })
-    }
-}
+    
+})
 
-export const createMechanic = async (req: Request, res: Response) => {
-    try{
+export const createMechanic = catchAsync( async (req: Request, res: Response) => {
 
         const jsonData = req.body;
         
@@ -99,14 +73,5 @@ export const createMechanic = async (req: Request, res: Response) => {
             .json({
                 status: "success",
                 Mechanic: newMechanic
-            })
-    }
-    catch(err)
-    {
-        res.status(400)
-            .json({
-                status: "failed",
-                error: err
-            })
-    }
-}
+            })    
+})
