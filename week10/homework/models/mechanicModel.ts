@@ -22,7 +22,8 @@ const mechanicSchema = new mongoose.Schema({
     title: {
         type: String,
         enum: ["Mechanic", "Shit Mechanic", "Good Mechanic"],
-        message: "title must be Mechanic, Shit Mechanic or Good Mechanic"
+        message: "title must be Mechanic, Shit Mechanic or Good Mechanic",
+        default: "Mechanic"
     },
     createdAt: {
         type: Date,
@@ -30,11 +31,11 @@ const mechanicSchema = new mongoose.Schema({
         select: false
     },
     //people: Array
-    people: {
+    people: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Person",
         required: [true, "A person must be assigned to a mechanic"]
-    },
+    }],
     slug: String,
 },{
         toJSON: {virtuals: true},
@@ -53,7 +54,6 @@ mechanicSchema.pre("save", function(next){
 })
 
 mechanicSchema.virtual("timepris").get(function() {
-    //return this.experience ? this.experience *120 : 100;
     return this.experience * 120;
 })
 
@@ -77,6 +77,6 @@ mechanicSchema.pre(/^find/, function(next) {
     next()
 })
 
-const Mechanic = mongoose.model("Mechanic", mechanicSchema)
+const MechanicModel = mongoose.model("Mechanic", mechanicSchema)
 
-export default Mechanic
+export default MechanicModel

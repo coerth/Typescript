@@ -1,12 +1,11 @@
 import { Request, Response } from "express";
-import Mechanic from "../models/mechanicModel";
+import MechanicModel from "../models/mechanicModel";
 import catchAsync from "../utility/CatchAsync"
 
 export const getMechanics = catchAsync( async (req: Request, res: Response) => {
 
     let queryObj = req.query;
-    console.log(queryObj)
-    const data = await Mechanic.find(queryObj)
+    const data = await MechanicModel.find(queryObj)
     res.status(200)
     .header({
         "Content-type": "application/json",
@@ -22,7 +21,7 @@ export const getMechanics = catchAsync( async (req: Request, res: Response) => {
 export const getMechanic = catchAsync( async (req: Request, res: Response) => {
 
     
-    const data = await Mechanic.findById(req.params.id)
+    const data = await MechanicModel.findById(req.params.id)
 
     res.status(200)
             .json({
@@ -34,7 +33,7 @@ export const getMechanic = catchAsync( async (req: Request, res: Response) => {
 export const updateMechanic = catchAsync( async (req: Request, res: Response) => {
 
 
-        const mechanic = Mechanic.findByIdAndUpdate(req.params.id, req.body, {
+        const mechanic = MechanicModel.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true
         })
@@ -52,7 +51,7 @@ export const deleteMechanic = catchAsync( async (req: Request, res: Response) =>
 
     
 
-        await Mechanic.findByIdAndDelete(req.params.id)
+        await MechanicModel.findByIdAndDelete(req.params.id)
 
 
         res.status(204)
@@ -67,7 +66,7 @@ export const createMechanic = catchAsync( async (req: Request, res: Response) =>
 
         const jsonData = req.body;
         
-        const newMechanic = await Mechanic.create(jsonData)
+        const newMechanic = await MechanicModel.create(jsonData)
     
         res.status(201)
             .json({

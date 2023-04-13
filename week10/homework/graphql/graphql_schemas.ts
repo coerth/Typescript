@@ -6,13 +6,23 @@ const typeDefs = `#graphql
     _id: ID!
     name: String!
     age: Int
-    address: Address # This is a relationship field (Many to One)
+    address: Address 
     
   }
 
   type Address {
     _id: ID!
     street: String!
+  }
+
+  type Mechanic {
+    _id: ID!
+    name: String!
+    email: String
+    title: String
+    experience: Int!
+    people: [Person!]! # This is a relationship field (Many to One)
+    timepris: Int
   }
   
 
@@ -23,9 +33,10 @@ const typeDefs = `#graphql
   type Query {
     people: [Person!]!
     addresses: [Address!]!
+    mechanics: [Mechanic!]!
     person(id: ID): Person!
     address(id: ID): Address!
-    
+    mechanic(id: ID): Mechanic!
   }
 
 
@@ -34,6 +45,11 @@ const typeDefs = `#graphql
     name: String!
     age: Int
     addressID: ID
+  }
+
+  input MechanicInput {
+    name: String!
+    experience: Int
   }
 
   input AddressInput {

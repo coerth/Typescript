@@ -11,11 +11,21 @@ export type Person = {
     address: Address
 }
 
+export type Mechanic = {
+    _id: string,
+    name: string,
+    title: string,
+    email: string
+    experience: number,
+    people: Person[]
+}
+
+
 export type Context = {
     people: Person[];
     addresses: Address[];
 };
 export type Args = {
     id: string;
-    input: Person | Address;
+    input: Person | Address | Mechanic;
 };

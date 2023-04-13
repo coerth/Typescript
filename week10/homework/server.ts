@@ -17,6 +17,6 @@ mongoose.connect(DB, {
 }).then(() => console.log('DB connection successful!'));
 
 app.listen(port, () => {
-  console.log(`App running on port http://localhost:${port}`);
+  console.log(`Graphql running on port http://localhost:${port}/graphql`);
 });
 

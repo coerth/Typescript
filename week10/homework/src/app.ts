@@ -10,7 +10,6 @@ import mechanicRouter from "../routes/mechanicRoute"
 import addressRouter from "../routes/addressRoute"
 import { Request, Response, NextFunction } from 'express';
 import {globalErrorHandler} from "../handlers/errorHandler"
-import AppError from "../utility/AppError"
 import cors from "cors"
 import {Person, Address} from "../types/types"
 import { ApolloServer } from '@apollo/server';
@@ -18,10 +17,8 @@ import { expressMiddleware } from '@apollo/server/express4';
 // The following 2 imports are for reliable shutdown of the server.
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import http from 'http';
-import Query from '../resolvers/query';
-import typeDefs from '../graphql_schemas';
-import { getPeople } from '../controllers/personController';
-
+import Query from '.././graphql/resolvers/query';
+import typeDefs from '../graphql/graphql_schemas';
 
 const app = express();
 
