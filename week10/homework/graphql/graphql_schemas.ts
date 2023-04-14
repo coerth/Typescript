@@ -39,6 +39,9 @@ const typeDefs = `#graphql
     mechanic(id: ID): Mechanic!
   }
 
+  type Mutation{
+    createAddress(input: AddressInput!): Address
+  }
 
   
   input PersonInput {

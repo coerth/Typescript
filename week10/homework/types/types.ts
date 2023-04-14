@@ -1,18 +1,18 @@
 
 export type Address = {
-    _id: string,
+    _id?: string,
     street: string
 }
 
 export type Person = {
-    _id: string,
+    _id?: string,
     name: string,
     age: number,
     address: Address
 }
 
 export type Mechanic = {
-    _id: string,
+    _id?: string,
     name: string,
     title: string,
     email: string

@@ -3,8 +3,8 @@ import { Person, Args, Address } from "../../types/types";
 import PersonModel from '../../models/personModel';
 import AddressModel from '../../models/addressModel';
 import MechanicModel from '../../models/mechanicModel';
-export default {
 
+export default {
     people: async (_parent:never, _args:Args) => PersonModel.find(),
     addresses: async (_parent:never, _args:Args) => AddressModel.find(),
     mechanics: async (_parent:never, _args:Args) => MechanicModel.find(),

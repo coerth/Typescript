@@ -18,25 +18,20 @@ import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import http from 'http';
 import Query from '.././graphql/resolvers/query';
+import Mutation from '.././graphql/resolvers/Mutation'
 import typeDefs from '../graphql/graphql_schemas';
 
 const app = express();
-
-interface MyContext {
-  people:  Person[];
-  addresses:  Address[];
-}
 
 const httpServer = http.createServer(app);
 const server = new ApolloServer({
   typeDefs,
   resolvers: {
-    Query
-  
+    Query,
+    Mutation
   },
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 });
-// 
 
 await server.start();
 
@@ -45,26 +40,16 @@ cors<cors.CorsRequest>(),
 express.json(),
 expressMiddleware(server));
 
-
-
-
-app.use(cors())
-
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
   console.log("Development mode...");
 }
 
+app.use(cors())
 app.use(express.json()); // Body parser for JSON data
-
-
-
 app.use("/api/v1/people", personRouter)
 app.use("/api/v1/mechanic", mechanicRouter)
 app.use("/api/v1/address", addressRouter)
-
-
-
 app.use(globalErrorHandler)
 
 export default app
