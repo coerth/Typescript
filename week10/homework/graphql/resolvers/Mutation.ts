@@ -27,7 +27,7 @@ export default {
             runValidators: true
         })
         
-          return address; // person not found
+          return address; 
         }
     }
             
