@@ -42,6 +42,7 @@ const typeDefs = `#graphql
   type Mutation{
     createAddress(input: AddressInput!): Address
     deleteAddress(id: ID!): Boolean
+    updateAddress(id: ID!, input: AddressInput!): Address
   }
 
   

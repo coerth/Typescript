@@ -3,7 +3,7 @@ import AddressModel from "../../models/addressModel";
 
 export default {
     createAddress: async (_parent:never, { input }:Args) => {
-      if('street' in input){ // input is a Book
+      if('street' in input){ // input is a Address
         let newAddress: Address = {
           street: input.street
         };
@@ -19,5 +19,16 @@ export default {
           return false; // address not found
         }
         return true; // deletion successful
-      }
+    },
+    updateAddress: async (_parent: never, { id, input }:Args) => {
+        if('street' in input){ // input is a Address
+        let address = await AddressModel.findByIdAndUpdate(id, input, {
+            new:true,
+            runValidators: true
+        })
+        
+          return address; // person not found
+        }
+    }
+            
 }
