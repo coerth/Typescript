@@ -12,5 +12,12 @@ export default {
       } else {
         return null;
       }
-    }
+    },
+    deleteAddress: async (_parent:never, { id }:Args) => {
+        let deletedAddress = await AddressModel.findByIdAndDelete(id)
+        if (deletedAddress === null) {
+          return false; // address not found
+        }
+        return true; // deletion successful
+      }
 }

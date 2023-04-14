@@ -24,7 +24,7 @@ import typeDefs from '../graphql/graphql_schemas';
 const app = express();
 
 const httpServer = http.createServer(app);
-const server = new ApolloServer({
+const server: ApolloServer = new ApolloServer({
   typeDefs,
   resolvers: {
     Query,
