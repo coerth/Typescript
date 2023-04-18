@@ -1,5 +1,6 @@
 import { Address, Args } from "../../types/types";
 import AddressModel from "../../models/addressModel";
+import MechanicModel from "../../models/mechanicModel";
 
 export default {
     createAddress: async (_parent:never, { input }:Args) => {
@@ -29,6 +30,16 @@ export default {
         
           return address; 
         }
-    }
+    },
+    updateMechanic: async (_parent: never, { id, input }:Args) => {
+      if('experience' in input){ // input is a Mechanic
+      let mechanic = await MechanicModel.findByIdAndUpdate(id, input, {
+          new:true,
+          runValidators: true
+      })
+      
+        return mechanic; 
+      }
+  }
             
 }

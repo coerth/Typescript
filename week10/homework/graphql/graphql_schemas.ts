@@ -43,6 +43,7 @@ const typeDefs = `#graphql
     createAddress(input: AddressInput!): Address
     deleteAddress(id: ID!): Boolean
     updateAddress(id: ID!, input: AddressInput!): Address
+    updateMechanic(id: ID!, input: MechanicInput!): Mechanic
   }
 
   
@@ -53,8 +54,11 @@ const typeDefs = `#graphql
   }
 
   input MechanicInput {
-    name: String!
-    experience: Int
+    name: String
+    email: String
+    title: String
+    experience: Int!
+    people: [ID]
   }
 
   input AddressInput {
