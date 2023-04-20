@@ -1,6 +1,9 @@
-import { Address, Args } from "../../types/types";
+import { Address, Args, Person } from "../../types/types";
 import AddressModel from "../../models/addressModel";
 import MechanicModel from "../../models/mechanicModel";
+import PersonModel from "../../models/personModel"
+import { Performance } from "perf_hooks";
+import  {Mechanic}  from "../../types/types";
 
 export default {
     createAddress: async (_parent:never, { input }:Args) => {
@@ -22,7 +25,7 @@ export default {
         return true; // deletion successful
     },
     updateAddress: async (_parent: never, { id, input }:Args) => {
-        if('street' in input){ // input is a Address
+        if("experience" in input){ // input is a Address
         let address = await AddressModel.findByIdAndUpdate(id, input, {
             new:true,
             runValidators: true
@@ -40,6 +43,14 @@ export default {
       
         return mechanic; 
       }
+  },
+  createPerson: async (_parent:never, { input }:Args) => {
+    if('age' in input){ 
+      let createdPerson = await PersonModel.create(input)
+      return createdPerson;
+    } else {
+      return null;
+    }
   }
             
 }

@@ -44,13 +44,13 @@ const typeDefs = `#graphql
     deleteAddress(id: ID!): Boolean
     updateAddress(id: ID!, input: AddressInput!): Address
     updateMechanic(id: ID!, input: MechanicInput!): Mechanic
+    createPerson(input: PersonInput!): Person
   }
-
   
   input PersonInput {
     name: String!
     age: Int
-    addressID: ID
+    address: ID
   }
 
   input MechanicInput {

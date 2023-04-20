@@ -39,6 +39,13 @@ personSchema.pre(/^find/, function(next) {
     next()
 })
 
+personSchema.post("save", function(doc, next){
+    
+      this.populate({
+        path: "address"})
+        .then( () => next())
+})
+
 const PersonModel = mongoose.model("Person", personSchema)
 
 export default PersonModel
