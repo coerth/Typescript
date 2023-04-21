@@ -40,7 +40,6 @@ personSchema.pre(/^find/, function(next) {
 })
 
 personSchema.post("save", function(doc, next){
-    
       this.populate({
         path: "address"})
         .then( () => next())
