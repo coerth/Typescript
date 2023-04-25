@@ -22,7 +22,12 @@ const personSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Address"
     }
+    
 })
+
+/* personSchema.virtual("cursor").get(function() {
+    return this.createdAt;
+}) */
 
 personSchema.pre(/^find/, function() {
     this.populate({

@@ -7,8 +7,8 @@ const typeDefs = `#graphql
     name: String!
     age: Int
     address: Address 
-    
   }
+
 
   type Address {
     _id: ID!
